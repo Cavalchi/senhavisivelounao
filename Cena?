@@ -1,0 +1,47 @@
+//nesse códigio caso vc tenha algo mais complexo como por exemplo sistema de login e senha no seu jogo unity vc precise de login, ou seja mesmo um jogo fechado no seu próprio banco de dados
+// caso vc precise (espero que não (rs)) vc tem que entender como deixar senha visivel ou invisivel na Unity
+// vc precisa de um "inputfield", mas o código só irá trocar a sua formatação de "Normal" para "password" onde ele deixa censurado a sua senha com ****
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class Senha : MonoBehaviour
+{
+    public TMP_InputField passwordInput;
+    public Button toggleButton;
+    public Button secondButton;
+
+    void Start()
+    {
+        toggleButton.onClick.AddListener(TogglePassword);
+        secondButton.onClick.AddListener(TogglePasswordBack);
+        secondButton.gameObject.SetActive(false);
+    }
+
+    void TogglePassword()
+    {
+        if (passwordInput.contentType == TMP_InputField.ContentType.Password)
+        {
+            passwordInput.contentType = TMP_InputField.ContentType.Standard;
+            passwordInput.ForceLabelUpdate();
+            toggleButton.gameObject.SetActive(false);
+            secondButton.gameObject.SetActive(true);
+        }
+    }
+
+    void TogglePasswordBack()
+    {
+        if (passwordInput.contentType == TMP_InputField.ContentType.Standard)
+        {
+            passwordInput.contentType = TMP_InputField.ContentType.Password;
+            passwordInput.ForceLabelUpdate();
+            toggleButton.gameObject.SetActive(true);
+            secondButton.gameObject.SetActive(false);
+        }
+    }
+}
+
+// leve em consideração que eu coloquei o Inputfield no código para ele saber o texto que foi colocado e poder trocar ele para "password", vc precisará de um botão que ao tocar ele fará essa função
